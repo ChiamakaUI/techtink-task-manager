@@ -6,9 +6,7 @@ const SearchForm = ({ onSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!input) return;
     onSearch(input);
-    setInput("");
   };
 
   return (
@@ -18,7 +16,10 @@ const SearchForm = ({ onSearch }) => {
         variant="outlined"
         fullWidth
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          setInput(e.target.value);
+          onSearch(e.target.value); // Trigger search on every input change
+        }}
       />
     </Box>
   );
